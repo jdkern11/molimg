@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "molimg"
+version = "0.1.0"
+description = ""
+authors = ["jdkern11 <leolion29@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+rdkit = "^2022.9.4"
+pandas = "^1.5.3"
+xlsxwriter = "^3.0.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
