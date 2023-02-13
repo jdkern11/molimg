@@ -1,0 +1,10 @@
+**/*.DS_Store
+**/*log
+**/*.pyc
+**/*.swp
+data/*.png
+**/*.csv
+**/*.pkl
+data/
+**/._*.png
+dist/
