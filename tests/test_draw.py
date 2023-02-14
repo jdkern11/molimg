@@ -8,7 +8,8 @@ from molimg import draw
 
 @pytest.fixture
 def df():
-    return pd.read_csv(str(Path("data") / "example_data.csv"))
+    folder = Path(__file__).resolve().parent
+    return pd.read_csv(str(folder / "data" / "example_data.csv"))
 
 
 def test_smiles_to_png(tmp_path, df):

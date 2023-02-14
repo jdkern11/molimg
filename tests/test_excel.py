@@ -7,7 +7,8 @@ from molimg import excel
 
 @pytest.fixture
 def df():
-    return pd.read_csv(str(Path("data") / "example_data.csv"))
+    folder = Path(__file__).resolve().parent
+    return pd.read_csv(str(folder / "data" / "example_data.csv"))
 
 
 def test_write(tmp_path, df):
