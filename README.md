@@ -1,4 +1,10 @@
 # Molecular Imager
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://github.com/jdkern11/molimg/workflows/tests/badge.svg)](https://github.com/jdkern11/molimg/actions?workflow=tests)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
+[![codecov](https://codecov.io/gh/jdkern11/molimg/branch/main/graph/badge.svg?token=4MU1H8MD94)](https://codecov.io/gh/jdkern11/molimg)
+[![version](https://img.shields.io/badge/Release-0.1.0-blue)](https://github.com/jdkern11/molimg/releases)
+
 Do you ever wish you could easily embed the images of your smiles strings into 
 an excel sheet? Wish no more! molimg is here to do just that!
 

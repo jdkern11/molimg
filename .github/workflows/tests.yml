@@ -1,0 +1,42 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - molimg/**
+      - tests/**
+
+jobs:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9"]
+        os: [ubuntu-18.04]
+        poetry-version: ["1.2.0"]
+
+  runs-on: ${{ matrix.os }}
+  steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run image
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+
+      - name: Install dependencies
+        run: poetry install
+      - name: Run coverage test
+        run: poetry run pytest --cov-report xml:coverage.xml --cov=molimg/
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          directory: ./coverage/
+          name: codecov-molimg
+          fail_ci_if_error: false
+          verbose: true
