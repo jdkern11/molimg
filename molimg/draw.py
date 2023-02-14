@@ -11,6 +11,21 @@ from rdkit.Chem.Draw import rdMolDraw2D
 import molimg
 logger = logging.getLogger(__name__)
 
+def df_columns_of_smiles_to_pngs(df: pd.DataFrame, columns: list[str], save_folder: str):
+    """Saves smiles in multiple columns to png formats.
+
+    Args:
+        df: dataframe with smiles columns
+        columns: list of column names with smiles strings
+        save_folder: Folder to save column folders in. Column folders will be the
+            same name as the column string.
+    """
+    save_folder = Path(save_folder)
+    save_folder.mkdir(exist_ok=True)
+    for column in columns:
+        df_column_of_smiles_to_pngs(df, column, str(save_folder / column))
+
+
 def df_column_of_smiles_to_pngs(df: pd.DataFrame, column: str, save_folder: str):
     """Saves all smiles in df column to png format
 
@@ -25,6 +40,8 @@ def df_column_of_smiles_to_pngs(df: pd.DataFrame, column: str, save_folder: str)
     for index, row in df.iterrows():
         try:
             smiles_to_png(row[column], f"{str(save_folder / row[column])}.png")
+        # To get Boost.Python.ArgumentError. This is a C++ error and can only
+        # be caught with Excpetion
         except Exception as e:
             logger.warning(e)
             continue
