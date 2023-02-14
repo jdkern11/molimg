@@ -4,10 +4,10 @@
 **/*.swp
 data/*.png
 **/*.csv
-!tests/data/example_data.csv
 **/*.pkl
 data/
 **/._*.png
 dist/
 .coverage
 **/.coverage
+!tests/data/example_data.csv
