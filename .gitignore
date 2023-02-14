@@ -4,6 +4,7 @@
 **/*.swp
 data/*.png
 **/*.csv
+!tests/data/example_data.csv
 **/*.pkl
 data/
 **/._*.png
