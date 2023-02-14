@@ -33,6 +33,8 @@ jobs:
         run: poetry install
       - name: Run coverage test
         run: poetry run pytest --cov-report xml:coverage.xml --cov=molimg/
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
