@@ -11,8 +11,9 @@ and molimg will convert it like so:
 ![image of example data](https://raw.githubusercontent.com/jdkern11/molimg/main/images/example_csv_with_images.png)
 
 ## Usage
-Assuming I am writing a script in the folder that contains the example data,
-then I would write the following code:
+First, import the data into a pandas dataframe, then pass this dataframe, the 
+columns that you want to convert to images, and the save name of the file to the 
+package:
 
 ```Python
 import pandas as pd
