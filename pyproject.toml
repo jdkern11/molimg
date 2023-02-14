@@ -10,7 +10,6 @@ python = "^3.10"
 rdkit = "^2022.9.4"
 pandas = "^1.5.3"
 xlsxwriter = "^3.0.8"
-python-json-logger = "^2.0.6"
 
 
 [tool.poetry.group.dev.dependencies]
