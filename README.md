@@ -29,4 +29,8 @@ excel.write(
 
 The order the columns appear in df.columns is how the columns will be saved in
 the new excel sheet. The new smiles columns with images will always appear to the right
-of the data they originate from. 
+of the data they originate from with `{original_column}_image` as the new column name.
+
+Any error that occurs when trying to convert a smiles string to an image 
+will appear as a warning log message and the image will not be produced. The excel sheet
+will still be created with the smiles strings that work.
