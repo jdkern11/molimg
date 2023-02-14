@@ -18,26 +18,26 @@ def write(df: pd.DataFrame, smiles_columns: list[str], filename: str):
     Images are embedded in separate columns in the excel file.
 
     Args:
-        df: 
+        df:
             Dataframe to save data in
-        smiles_columns: 
+        smiles_columns:
             List of columns in the dataframe that contain the smiles
             strings. These smiles will be converted to images and the images will
             be embedded in the excel file in a new column.
-        filename: 
-            Name of the saved excel files. Extensions will be removed 
+        filename:
+            Name of the saved excel files. Extensions will be removed
             (filename.extension) and filename will be saved as "filename.xlsx".
     """
-    logger.debug(f'Converting smiles in {smiles_columns} to images')
+    logger.debug(f"Converting smiles in {smiles_columns} to images")
     filename = remove_extensions(filename)
     folder_name = str(uuid.uuid4())
     # make sure folder doesn't already exist
     while Path(folder_name).exists():
         folder_name = str(uuid.uuid4())
-         
+
     df_columns_of_smiles_to_pngs(df, smiles_columns, folder_name)
 
-    workbook = xlsxwriter.Workbook(f'{filename}.xlsx')
+    workbook = xlsxwriter.Workbook(f"{filename}.xlsx")
     worksheet = workbook.add_worksheet()
 
     r, c = 0, 0
@@ -58,9 +58,11 @@ def write(df: pd.DataFrame, smiles_columns: list[str], filename: str):
             worksheet.set_column_pixels(c, c, 205)
             for index, row in df.iterrows():
                 r += 1
-                filepath = Path(folder_name) / column / f'{row[column]}.png'
+                filepath = Path(folder_name) / column / f"{row[column]}.png"
                 if filepath.exists():
-                    worksheet.insert_image(r, c, str(filepath), {'x_offset': 2.5, 'y_offset': 2.5})
+                    worksheet.insert_image(
+                        r, c, str(filepath), {"x_offset": 2.5, "y_offset": 2.5}
+                    )
                     worksheet.set_row_pixels(r, 205)
         c += 1
         r = 0

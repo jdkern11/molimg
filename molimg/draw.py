@@ -8,9 +8,13 @@ from rdkit import Chem
 from rdkit.Chem.Draw import rdMolDraw2D
 
 from molimg.helpers import remove_extensions
+
 logger = logging.getLogger(__name__)
 
-def df_columns_of_smiles_to_pngs(df: pd.DataFrame, columns: list[str], save_folder: str):
+
+def df_columns_of_smiles_to_pngs(
+    df: pd.DataFrame, columns: list[str], save_folder: str
+):
     """Saves smiles in multiple columns to png formats.
 
     Args:
@@ -53,6 +57,7 @@ def df_column_of_smiles_to_pngs(df: pd.DataFrame, column: str, save_folder: str)
             logger.warning(f"For {row[column]}, {e}")
             continue
 
+
 def smiles_to_png(smiles: str, filename: str, width: int = 200, height: int = 200):
     """Creates png of smiles string"""
     logger.debug(f"Converting {smiles} to image")
@@ -63,4 +68,4 @@ def smiles_to_png(smiles: str, filename: str, width: int = 200, height: int = 20
     drawer.FinishDrawing()
     png = drawer.GetDrawingText()
     im = Image.open(io.BytesIO(png))
-    im.save(remove_extensions(filename) + '.png', "PNG")
+    im.save(remove_extensions(filename) + ".png", "PNG")
