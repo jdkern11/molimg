@@ -34,6 +34,18 @@ def write(df: pd.DataFrame, smiles_columns: list[str], filename: str):
     # make sure folder doesn't already exist
     while Path(folder_name).exists():
         folder_name = str(uuid.uuid4())
+    
+    # record columns before more added
+    columns = df.columns
+    # add uuid for each smiles column so names are unique and not invalid
+    for col in smiles_columns:
+        data = set()
+        for index, row in df.iterrows():
+            name = uuid.uuid4()
+            while name in data:
+                name = uuid.uuid4()
+            data.add(str(name))
+        df[f"{col}_image"] = list(data)
 
     df_columns_of_smiles_to_pngs(df, smiles_columns, folder_name)
 
@@ -41,7 +53,8 @@ def write(df: pd.DataFrame, smiles_columns: list[str], filename: str):
     worksheet = workbook.add_worksheet()
 
     r, c = 0, 0
-    for column in df.columns:
+    # use previously recorded columns
+    for column in columns:
         worksheet.write(r, c, column)
         for index, row in df.iterrows():
             r += 1
@@ -54,11 +67,12 @@ def write(df: pd.DataFrame, smiles_columns: list[str], filename: str):
         if column in smiles_columns:
             r = 0
             c += 1
-            worksheet.write(r, c, f"{column}_image")
+            image_column = f"{column}_image"
+            worksheet.write(r, c, image_column)
             worksheet.set_column_pixels(c, c, 205)
             for index, row in df.iterrows():
                 r += 1
-                filepath = Path(folder_name) / column / f"{row[column]}.png"
+                filepath = Path(folder_name) / column / f"{row[image_column]}.png"
                 if filepath.exists():
                     worksheet.insert_image(
                         r, c, str(filepath), {"x_offset": 2.5, "y_offset": 2.5}

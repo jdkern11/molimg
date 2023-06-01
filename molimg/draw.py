@@ -50,7 +50,8 @@ def df_column_of_smiles_to_pngs(df: pd.DataFrame, column: str, save_folder: str)
     for index, row in df.iterrows():
         try:
             if not pd.isna(row[column]):
-                smiles_to_png(row[column], f"{str(save_folder / row[column])}.png")
+                image_column = column + "_image"
+                smiles_to_png(row[column], f"{str(save_folder / row[image_column])}")
         # To get Boost.Python.ArgumentError. This is a C++ error and can only
         # be caught with Excpetion
         except Exception as e:
